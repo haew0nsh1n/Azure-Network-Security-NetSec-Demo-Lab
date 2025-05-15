@@ -3,7 +3,7 @@
 This ARM deployment includes everything needed to test Azure Network Security components including the new Azure Firewall Premium. If you are looking to test out a migration, please use the [old lab](https://github.com/Azure/Azure-Network-Security/tree/master/Lab%20Templates/Lab%20Template%20-%20NetSec%20Demo%20Lab-Standard) with Azure firewall standard.
 
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhaew0nsh1n%2FAzure-Network-Security-NetSec-Demo-Lab%2Frefs%sFheads%2Fmaster%2FAzNetSecdeploy.json)  
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhaew0nsh1n%2FAzure-Network-Security-NetSec-Demo-Lab%2Frefs%2Fheads%2Fmaster%2FAzNetSecdeploy.json)  
 
 
 ## Step-by-step documentation:
