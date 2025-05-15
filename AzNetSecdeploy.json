@@ -8,7 +8,7 @@
     },
     "deployFirewall": {
       "type": "bool",
-      "defaultValue": true
+      "defaultValue": false
     },
     "deployFrontDoor": {
       "type": "bool",
@@ -16,7 +16,7 @@
     },
     "deployVirtualMachines": {
       "type": "bool",
-      "defaultValue": true
+      "defaultValue": false
     },
     "deployApplicationGateway": {
       "type": "bool",
