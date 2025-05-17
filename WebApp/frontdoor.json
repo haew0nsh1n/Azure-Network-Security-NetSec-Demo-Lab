@@ -136,48 +136,8 @@
                 }
               ],
               "action": "Block"
-            },
-            {
-              "name": "RuleRedirectInternetExplorer",
-              "enabledState": "Enabled",
-              "priority": 200,
-              "ruleType": "MatchRule",
-              "rateLimitDurationInMinutes": 1,
-              "rateLimitThreshold": 100,
-              "matchConditions": [
-                {
-                  "matchVariable": "RequestHeader",
-                  "selector": "User-Agent",
-                  "operator": "Contains",
-                  "negateCondition": false,
-                  "matchValue": [
-                    "rv:11.0"
-                  ],
-                  "transforms": []
-                }
-              ],
-              "action": "Redirect"
-            },
-            {
-              "name": "RatelimitRequest",
-              "enabledState": "Enabled",
-              "priority": 300,
-              "ruleType": "RateLimitRule",
-              "rateLimitDurationInMinutes": 1,
-              "rateLimitThreshold": 5,
-              "matchConditions": [
-                {
-                  "matchVariable": "RequestUri",
-                  "operator": "Contains",
-                  "negateCondition": false,
-                  "matchValue": [
-                    "search"
-                  ],
-                  "transforms": []
-                }
-              ],
-              "action": "Block"
             }
+            
           ]
         },
         "managedRules": {
