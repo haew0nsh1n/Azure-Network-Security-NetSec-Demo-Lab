@@ -31,7 +31,6 @@
         "[concat('Microsoft.Cdn/Profiles/', parameters('resourceNames').fdProfileName)]"
       ],
       "properties": {
-        "originResponseTimeoutSeconds": 60,
         "enabledState": "Enabled"
       }
     },
