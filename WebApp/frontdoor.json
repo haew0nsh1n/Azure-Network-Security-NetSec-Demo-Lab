@@ -102,7 +102,7 @@
     },
     {
       "type": "Microsoft.Network/frontdoorwebapplicationfirewallpolicies",
-      "apiVersion": "2025-03-01",
+      "apiVersion": "2024-02-01",
       "name": "[parameters('resourceNames').fdWafName]",
       "location": "global",
       "sku": {
@@ -112,26 +112,94 @@
         "policySettings": {
           "enabledState": "Enabled",
           "mode": "Prevention",
-          "redirectUrl": "https://www.microsoft.com/en-us/edge?r=1",
-          "customBlockResponseStatusCode": 403,
-          "customBlockResponseBody": "[base64('<html><head><title>WAF Demo</title></head><body bgcolor=\"#FFB299\"><p><h1><strong>WAF Unique Response Code</strong></h1></p><p>Contact us and provide the following code: {(azure-ref)}<br></p></body></html>')]",
-          "requestBodyCheck": "Enabled"
+          "requestBodyCheck": "Enabled",
+          "javascriptChallengeExpirationInMinutes": 30
+        },
+        "customRules": {
+            "rules": [
+            {
+              "name": "BlockGeoLocationChina",
+              "enabledState": "Enabled",
+              "priority": 100,
+              "ruleType": "MatchRule",
+              "rateLimitDurationInMinutes": 1,
+              "rateLimitThreshold": 100,
+              "matchConditions": [
+                {
+                  "matchVariable": "RemoteAddr",
+                  "operator": "GeoMatch",
+                  "negateCondition": false,
+                  "matchValue": [
+                    "CN"
+                  ],
+                  "transforms": []
+                }
+              ],
+              "action": "Block"
+            },
+            {
+              "name": "RuleRedirectInternetExplorer",
+              "enabledState": "Enabled",
+              "priority": 200,
+              "ruleType": "MatchRule",
+              "rateLimitDurationInMinutes": 1,
+              "rateLimitThreshold": 100,
+              "matchConditions": [
+                {
+                  "matchVariable": "RequestHeader",
+                  "selector": "User-Agent",
+                  "operator": "Contains",
+                  "negateCondition": false,
+                  "matchValue": [
+                    "rv:11.0"
+                  ],
+                  "transforms": []
+                }
+              ],
+              "action": "Redirect"
+            },
+            {
+              "name": "RatelimitRequest",
+              "enabledState": "Enabled",
+              "priority": 300,
+              "ruleType": "RateLimitRule",
+              "rateLimitDurationInMinutes": 1,
+              "rateLimitThreshold": 5,
+              "matchConditions": [
+                {
+                  "matchVariable": "RequestUri",
+                  "operator": "Contains",
+                  "negateCondition": false,
+                  "matchValue": [
+                    "search"
+                  ],
+                  "transforms": []
+                }
+              ],
+              "action": "Block"
+            }
+          ]
         },
         "managedRules": {
           "managedRuleSets": [
             {
               "ruleSetType": "Microsoft_DefaultRuleSet",
-              "ruleSetVersion": "2.1"
+              "ruleSetVersion": "2.1",
+              "ruleSetAction": "Block",
+              "ruleGroupOverrides": [],
+              "exclusions": []
             },
             {
               "ruleSetType": "Microsoft_BotManagerRuleSet",
-              "ruleSetVersion": "1.0"
+              "ruleSetVersion": "1.0",
+              "ruleGroupOverrides": [],
+              "exclusions": []
             }
           ]
         }
       }
     },
-    {
+    {        
       "type": "Microsoft.Cdn/Profiles/SecurityPolicies",
       "apiVersion": "2021-06-01",
       "name": "[concat(parameters('resourceNames').fdProfileName, '/', parameters('resourceNames').fdSecurityPolicyName)]",
