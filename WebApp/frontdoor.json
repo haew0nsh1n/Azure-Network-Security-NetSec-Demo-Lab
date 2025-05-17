@@ -139,10 +139,10 @@
         "[resourceId('Microsoft.Cdn/Profiles/originGroups', parameters('resourceNames').fdProfileName, parameters('resourceNames').fdOriginGroupName)]"
       ],
       "properties": {
-        "hostName": "[reference(resourceId('Microsoft.Network/publicIPAddresses', parameters('resourceNames').agIpAddress), '2025-03-01').IpAddress]",
+        "hostName": "[reference(resourceId('Microsoft.Network/publicIPAddresses', parameters('resourceNames').agIpAddress), '2024-07-01').IpAddress]",
         "httpPort": 80,
         "httpsPort": 443,
-        "originHostHeader": "[reference(resourceId('Microsoft.Network/publicIPAddresses', parameters('resourceNames').agIpAddress), '2025-03-01').IpAddress]",
+        "originHostHeader": "[reference(resourceId('Microsoft.Network/publicIPAddresses', parameters('resourceNames').agIpAddress), '2024-07-01').IpAddress]",
         "priority": 1,
         "weight": 1000,
         "enabledState": "Enabled"
@@ -150,7 +150,7 @@
     },
     {
       "type": "Microsoft.Network/frontdoorwebapplicationfirewallpolicies",
-      "apiVersion": "2025-03-01",
+      "apiVersion": "2024-07-01",
       "name": "[parameters('resourceNames').fdWafName]",
       "location": "global",
       "sku": {
